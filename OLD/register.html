@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>員工註冊系統</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background-color: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
+        .container h2 { text-align: center; color: #333; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #555; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 0.75rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        .btn:hover { background-color: #0056b3; }
+        /* 用於顯示錯誤或成功訊息 */
+        .message { text-align: center; padding: 1rem; margin-bottom: 1rem; border-radius: 4px; display: none; }
+        .message.success { background-color: #d4edda; color: #155724; }
+        .message.error { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>員工註冊系統</h2>
+
+        <div id="message" class="message"></div>
+
+        <form id="registerForm" action="register_process.php" method="POST">
+            <div class="form-group">
+                <label for="employee_id">員工編號 (登入帳號)</label>
+                <input type="text" id="employee_id" name="employee_id" readonly required>
+            </div>
+            <div class="form-group">
+                <label for="full_name">員工全名</label>
+                <input type="text" id="full_name" name="full_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">電子郵件</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="department">部門</label>
+                <select id="department" name="department">
+                    <option value="">請選擇部門</option>
+                    <option value="人資部">人資部</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">職位</label>
+                <select id="position" name="position">
+                    <option value="">請選擇職位</option>
+                    <option value="助理專員">助理專員</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="password">設定密碼</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">確認密碼</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn">立即註冊</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
+<script>
+// 取得現在時間
+function generateEmployeeID() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // 0~11
+    const day = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+
+    // YYYYMMDDHHMM
+    return `${year}${month}${day}${hour}${minute}`;
+}
+
+// 自動填入 input
+document.getElementById('employee_id').value = generateEmployeeID();
+</script>

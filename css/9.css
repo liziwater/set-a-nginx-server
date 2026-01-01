@@ -1,0 +1,42 @@
+/* CSS 這裡 */
+header {
+    background-color: #333;
+    padding: 1rem;
+    color: white;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin-right: 20px;
+}
+
+section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.services ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.services li {
+    margin-bottom: 10px;
+}
+
+.contact p {
+    margin: 0.5rem 0;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}

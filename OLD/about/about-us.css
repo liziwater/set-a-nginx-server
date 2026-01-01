@@ -1,0 +1,153 @@
+/* 🌟 通用樣式 */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* 柔和背景 */
+  color: #1C3D5A; /* 深藍色字體 */
+}
+
+/* 🏢 主要內容容器 */
+.container {
+  width: 85%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* ✨ 標題設計 */
+.about-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #1C3D5A; /* 深藍色 */
+  border-bottom: 4px solid #D4AF37; /* 金色底線 */
+  display: inline-block;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.about-title:hover {
+  transform: scale(1.05);
+}
+
+.partner {
+  text-align: center;
+  font-size: 18px;
+  color: #D4AF37; /* 金色 */
+  font-weight: bold;
+}
+
+/* 📜 內容描述 */
+.about-description {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* 🌟 核心價值 */
+.core-values {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+.core-values li {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #1C3D5A;
+  font-weight: bold;
+}
+
+/* 🏢 公司架構 */
+.company-structure {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* 🔹 領導人卡片 */
+.leader-info {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 320px;
+  border-top: 5px solid #D4AF37; /* 金色上邊框 */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.leader-info:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎭 領導人照片 */
+.leader-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 4px solid #D4AF37; /* 金色邊框 */
+}
+
+/* 📌 角色與名稱 */
+.leader-role {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1C3D5A; /* 深藍色 */
+}
+
+.leader-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #D4AF37; /* 金色 */
+}
+
+.leader-bio {
+  font-size: 15px;
+  text-align: justify;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* 🎀 按鈕樣式 */
+.btn {
+  display: inline-block;
+  background-color: #1C3D5A; /* 深藍 */
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #D4AF37; /* 金色 */
+  color: #1C3D5A; /* 深藍色 */
+  transform: scale(1.08);
+}
+
+/* 🔄 動畫效果 */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.leader-info {
+  animation: fadeIn 0.7s ease-in-out;
+}

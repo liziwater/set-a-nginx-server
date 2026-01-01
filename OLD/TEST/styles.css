@@ -1,0 +1,117 @@
+/* 基本樣式 */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Header 樣式 */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #003366, #0066cc); /* 深藍漸層背景 */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo 樣式 */
+.logo img {
+    height: 60px;
+}
+
+/* 導覽列樣式 */
+.navbar {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* 按鈕樣式 */
+.navbar .btn {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 30px; /* 圓形按鈕 */
+    transition: all 0.3s ease-in-out;
+    display: inline-flex; /* 使用 inline-flex 方便文字置中 */
+    align-items: center; /* 垂直置中 */
+    justify-content: center; /* 水平置中 */
+    gap: 8px; /* 圖示與文字間距 */
+    background-color: #0066cc; /* 標準藍色背景 */
+    text-align: center; /* 確保多行文字也居中 */
+}
+
+.navbar .btn:hover {
+    background-color: #ffcc00; /* 黃色背景對比 */
+    color: #003366; /* 深藍文字 */
+}
+
+/* 主按鈕（首頁） */
+.navbar .primary {
+    background-color: #ffcc00; /* 醒目的黃色 */
+    color: #003366;
+}
+
+.navbar .primary:hover {
+    background-color: #ff9900; /* 橘色漸層 */
+    color: white;
+}
+
+/* 下拉選單樣式 */
+.navbar .dropdown {
+    position: relative;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.navbar .dropdown-menu li a {
+    color: #003366;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .dropdown-menu li a:hover {
+    background-color: #0066cc;
+    color: white;
+}
+
+/* 顯示下拉選單 */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar {
+        flex-direction: column;
+        width: 100%;
+    }
+    .navbar li {
+        margin: 5px 0;
+    }
+}

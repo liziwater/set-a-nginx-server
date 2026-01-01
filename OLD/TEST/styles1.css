@@ -1,0 +1,123 @@
+/* 基本樣式 */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+}
+
+/* Header 樣式 */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: #ffffff; /* 純白背景 */
+    border-bottom: 2px solid #e0e0e0; /* 分隔線 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 輕微陰影 */
+}
+
+/* Logo 樣式 */
+.logo img {
+    height: 50px;
+}
+
+/* 導覽列樣式 */
+.navbar {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 15px; /* 按鈕間距 */
+}
+
+/* 按鈕樣式 */
+.navbar .btn {
+    text-decoration: none;
+    color: #00796b; /* 薄荷綠文字 */
+    font-weight: bold;
+    margin: 0;
+    padding: 10px 20px;
+    border-radius: 20px; /* 圓角按鈕 */
+    transition: all 0.3s ease-in-out;
+    display: inline-flex; /* 使用 inline-flex 方便文字置中 */
+    align-items: center; /* 垂直置中 */
+    justify-content: center; /* 水平置中 */
+    gap: 6px; /* 圖示與文字間距 */
+    background-color: #e0f2f1; /* 薄荷綠背景 */
+    text-align: center;
+    border: 1px solid #b2dfdb; /* 輕微邊框 */
+}
+
+.navbar .btn:hover {
+    background-color: #00796b; /* 深薄荷綠背景 */
+    color: white; /* 白色文字 */
+    border-color: #004d40; /* 深綠邊框 */
+}
+
+/* 主按鈕（首頁） */
+.navbar .primary {
+    background-color: #00796b; /* 深薄荷綠 */
+    color: white;
+    border: none;
+}
+
+.navbar .primary:hover {
+    background-color: #004d40; /* 更深的薄荷綠 */
+    color: white;
+}
+
+/* 下拉選單樣式 */
+.navbar .dropdown {
+    position: relative;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 180px;
+}
+
+.navbar .dropdown-menu li a {
+    color: #00796b;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .dropdown-menu li a:hover {
+    background-color: #b2dfdb; /* 輕薄荷綠背景 */
+    color: #004d40; /* 深文字 */
+}
+
+/* 顯示下拉選單 */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    .navbar {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px; /* 按鈕間距 */
+    }
+    .navbar li {
+        width: 100%; /* 全寬按鈕 */
+    }
+}

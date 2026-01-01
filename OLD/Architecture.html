@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司組織架構圖 - 前端顯示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .top-bar {
+            max-width: 1800px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .admin-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #333;
+            color: #333;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .admin-btn:hover {
+            background: #333;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 60px;
+            font-size: 2em;
+            font-weight: 600;
+        }
+        
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .position-box {
+            background: white;
+            border: 2px solid #333;
+            color: #333;
+            padding: 15px 25px;
+            text-align: center;
+            min-width: 160px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .position-box:hover {
+            background: #f9f9f9;
+            border-color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .position-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .name-field {
+            border-top: 1px solid #ddd;
+            padding-top: 8px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .connector-v {
+            width: 2px;
+            height: 40px;
+            background: #333;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .level {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .level::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: calc(100% - 100px);
+            height: 2px;
+            background: #333;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .level::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 25%;
+            width: 2px;
+            height: 20px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: 50%;
+            width: 2px;
+            height: 20px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .dept-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        .dept-grid::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .dept-grid::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .dept-grid-wide {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        .dept-grid-wide::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 16.67%;
+            width: 66.66%;
+            height: 2px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .dept-grid-wide::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .dept-item {
+            position: relative;
+        }
+        
+        .dept-item::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #333;
+            z-index: 1;
+        }
+        
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: #ddd;
+            margin: 30px 0;
+        }
+        
+        .section-label {
+            font-size: 0.85em;
+            color: #999;
+            text-align: center;
+            margin: 15px 0;
+            letter-spacing: 1px;
+        }
+        
+        /* 個人資料彈窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            border: 2px solid #333;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 5px 10px;
+        }
+        
+        .modal-close:hover {
+            color: #000;
+        }
+        
+        .modal-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+        
+        .info-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 3px solid #333;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #333;
+            background: white;
+            color: #333;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background: #333;
+            color: white;
+        }
+        
+        .upload-section {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 2px dashed #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #333;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background: #333;
+            color: white;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .modal-overlay, .top-bar {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .level {
+                gap: 50px;
+            }
+            .dept-grid-wide {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .level {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .dept-grid, .dept-grid-wide {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <label for="jsonFileInput" class="upload-btn">📂 載入資料</label>
+        <input type="file" id="jsonFileInput" class="file-input" accept=".json">
+        <a href="org_chart_backend.html" class="admin-btn">⚙️ 後台管理</a>
+    </div>
+    
+    <div class="container">
+        <h1>公司組織架構圖</h1>
+        
+        <div class="org-chart">
+            <!-- 董事長 -->
+            <div class="position-box" onclick="showInfo('董事長')" data-position="董事長">
+                <div class="position-title">董事長</div>
+                <div class="name-field" data-name>姓名：__________</div>
+            </div>
+            
+            <div class="connector-v"></div>
+            
+            <!-- 總經理 -->
+            <div class="position-box" onclick="showInfo('總經理')" data-position="總經理">
+                <div class="position-title">總經理</div>
+                <div class="name-field" data-name>姓名：__________</div>
+            </div>
+            
+            <div class="connector-v"></div>
+            
+            <!-- 副總經理層 -->
+            <div class="level">
+                <!-- 營業群 -->
+                <div class="branch">
+                    <div class="position-box" onclick="showInfo('副總經理(營業)')" data-position="副總經理(營業)">
+                        <div class="position-title">副總經理(營業)</div>
+                        <div class="name-field" data-name>姓名：__________</div>
+                    </div>
+                    
+                    <div class="connector-v"></div>
+                    
+                    <!-- 營運協理 -->
+                    <div class="position-box" onclick="showInfo('營運協理')" data-position="營運協理">
+                        <div class="position-title">營運協理</div>
+                        <div class="name-field" data-name>姓名：__________</div>
+                    </div>
+                    
+                    <div class="connector-v"></div>
+                    
+                    <div class="dept-section">
+                        <!-- 業務相關部門 -->
+                        <div class="section-label">業務管理部門</div>
+                        <div class="dept-grid">
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('招商部')" data-position="招商部">
+                                    <div class="position-title">招商部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('業務部')" data-position="業務部">
+                                    <div class="position-title">業務部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('客戶服務部')" data-position="客戶服務部">
+                                    <div class="position-title">客戶服務部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('專案管理部')" data-position="專案管理部">
+                                    <div class="position-title">專案管理部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="section-divider"></div>
+                        
+                        <!-- 專業執行部門 -->
+                        <div class="section-label">專業執行部門</div>
+                        <div class="dept-grid-wide">
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('資訊部')" data-position="資訊部">
+                                    <div class="position-title">資訊部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('專研部')" data-position="專研部">
+                                    <div class="position-title">專研部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('廣宣部')" data-position="廣宣部">
+                                    <div class="position-title">廣宣部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('製作部')" data-position="製作部">
+                                    <div class="position-title">製作部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('品質管理部')" data-position="品質管理部">
+                                    <div class="position-title">品質管理部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 行政群 -->
+                <div class="branch">
+                    <div class="position-box" onclick="showInfo('副總經理(行政)')" data-position="副總經理(行政)">
+                        <div class="position-title">副總經理(行政)</div>
+                        <div class="name-field" data-name>姓名：__________</div>
+                    </div>
+                    
+                    <div class="connector-v"></div>
+                    
+                    <!-- 行政協理 -->
+                    <div class="position-box" onclick="showInfo('行政協理')" data-position="行政協理">
+                        <div class="position-title">行政協理</div>
+                        <div class="name-field" data-name>姓名：__________</div>
+                    </div>
+                    
+                    <div class="connector-v"></div>
+                    
+                    <div class="dept-section">
+                        <!-- 行政支援部門 -->
+                        <div class="section-label">行政支援部門</div>
+                        <div class="dept-grid">
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('人力資源部')" data-position="人力資源部">
+                                    <div class="position-title">人力資源部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('財務部')" data-position="財務部">
+                                    <div class="position-title">財務部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('行政總務部')" data-position="行政總務部">
+                                    <div class="position-title">行政總務部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                            <div class="dept-item">
+                                <div class="position-box" onclick="showInfo('法務部')" data-position="法務部">
+                                    <div class="position-title">法務部</div>
+                                    <div class="name-field" data-name>經理：__________</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 個人資料彈窗 -->
+    <div class="modal-overlay" id="modal" onclick="closeModalOnOverlay(event)">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-title" id="modalTitle">個人資料</div>
+            
+            <div id="infoContent"></div>
+            
+            <button class="btn" onclick="closeModal()">關閉</button>
+        </div>
+    </div>
+    
+    <script>
+        let employeeData = {};
+        
+        // 載入JSON檔案
+        document.getElementById('jsonFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        employeeData = JSON.parse(event.target.result);
+                        updateAllDisplay();
+                        alert('資料載入成功！');
+                    } catch (error) {
+                        alert('載入失敗：檔案格式錯誤');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+        
+        // 更新所有顯示
+        function updateAllDisplay() {
+            Object.keys(employeeData).forEach(position => {
+                updateDisplay(position, employeeData[position].name);
+            });
+        }
+        
+        // 更新單一職位顯示
+        function updateDisplay(position, name) {
+            const boxes = document.querySelectorAll('[data-position]');
+            boxes.forEach(box => {
+                if (box.getAttribute('data-position') === position) {
+                    const nameField = box.querySelector('[data-name]');
+                    if (nameField) {
+                        const prefix = position.includes('部') ? '經理：' : '姓名：';
+                        nameField.textContent = name ? prefix + name : prefix + '__________';
+                    }
+                }
+            });
+        }
+        
+        // 顯示個人資料
+        function showInfo(position) {
+            const data = employeeData[position];
+            
+            document.getElementById('modalTitle').textContent = position + ' - 個人資料';
+            
+            let html = '';
+            
+            if (data && Object.keys(data).length > 0) {
+                if (data.name) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">姓名</div>
+                            <div class="info-value">${data.name}</div>
+                        </div>
+                    `;
+                }
+                if (data.employeeId) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">員工編號</div>
+                            <div class="info-value">${data.employeeId}</div>
+                        </div>
+                    `;
+                }
+                if (data.extension) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">分機號碼</div>
+                            <div class="info-value">${data.extension}</div>
+                        </div>
+                    `;
+                }
+                if (data.email) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">電子信箱</div>
+                            <div class="info-value">${data.email}</div>
+                        </div>
+                    `;
+                }
+                if (data.phone) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">手機號碼</div>
+                            <div class="info-value">${data.phone}</div>
+                        </div>
+                    `;
+                }
+                if (data.joinDate) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">到職日期</div>
+                            <div class="info-value">${data.joinDate}</div>
+                        </div>
+                    `;
+                }
+                if (data.notes) {
+                    html += `
+                        <div class="info-group">
+                            <div class="info-label">備註</div>
+                            <div class="info-value">${data.notes}</div>
+                        </div>
+                    `;
+                }
+            } else {
+                html = '<div class="info-group"><div class="info-value">尚無資料</div></div>';
+            }
+            
+            document.getElementById('infoContent').innerHTML = html;
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        function closeModalOnOverlay(event) {
+            if (event.target.id === 'modal') {
+                closeModal();
+            }
+        }
+        
+        // ESC鍵關閉彈窗
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

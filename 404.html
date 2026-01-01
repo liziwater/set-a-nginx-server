@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>404 Page Not Found | 誠訊集團</title>
+    <meta http-equiv="refresh" content="5;url=/index.php"> 
+
+    <style>
+        /* 基礎設置：居中、乾淨的背景 */
+        body {
+            background-color: #ffffff; /* 純白色背景 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* LOGO：僅作為品牌識別，尺寸適中 */
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 25px;
+            opacity: 0.85; /* 輕微透明化，更具質感 */
+        }
+
+        /* 404 錯誤代碼：放大且醒目 */
+        .error-code {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #e74c3c; /* 警告紅 */
+            margin: 0;
+        }
+
+        /* 核心標題：簡潔說明 */
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin: 5px 0 20px 0;
+        }
+
+        /* 錯誤說明區塊：簡潔、易懂 */
+        .explanation {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin: 10px 0 30px 0;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        /* 倒數計時：強調導航訊息 */
+        .countdown {
+            font-size: 1rem;
+            color: #3498db; /* 導航藍 */
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* 按鈕：簡潔有力 */
+        .btn {
+            padding: 10px 25px;
+            background-color: #3498db; 
+            color: #ffffff;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 480px) {
+            .error-code { font-size: 4rem; }
+            h1 { font-size: 1.4rem; }
+            .explanation { font-size: 0.9rem; }
+            .logo { max-width: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="/image/LOGO.png" alt="誠訊LOGO" class="logo" onerror="this.style.display='none'">
+
+    <p class="error-code">404</p>
+    <h1>網頁找不到 (Page Not Found)</h1>
+
+    <p class="explanation">
+        很抱歉，您嘗試訪問的網址可能已被移除、更名或輸入有誤。<br>
+        為確保您的使用順暢，我們將在短時間內帶您返回首頁。
+    </p>
+
+    <div class="countdown" id="countdown"></div>
+    
+    <a href="/index.php" class="btn">立即前往首頁</a>
+
+<script>
+    // 倒數計時功能 (與 meta 標籤的 5 秒同步)
+    let seconds = 5; 
+    const countdownElement = document.getElementById("countdown");
+
+    function updateCountdown() {
+        if (seconds > 0) {
+            countdownElement.textContent = `將於 ${seconds} 秒後自動返回首頁`;
+            seconds--;
+        } else {
+            countdownElement.textContent = "✅ 正在引導至首頁...";
+        }
+    }
+
+    updateCountdown();
+    // 每秒更新倒數計時
+    setInterval(updateCountdown, 1000); 
+    
+    // 由於 meta refresh 已設置，這裡不用再寫 window.location.href
+</script>
+</body>
+</html>

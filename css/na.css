@@ -1,0 +1,72 @@
+/* Wiki Container Styles */
+.wiki-container {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .wiki-table {
+    border-collapse: collapse;
+  }
+  
+  .wiki-table th, .wiki-table td {
+    text-align: left;
+    padding: 12px;
+    font-size: 1.1em;
+  }
+  
+  .wiki-table thead {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .accordion-button {
+    font-size: 1.1em;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #007bff;
+  }
+  
+  .accordion-button:not(.collapsed) {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .accordion-button:focus {
+    box-shadow: none;
+  }
+  
+  .accordion-body {
+    font-size: 1.1em;
+  }
+  
+  .wiki-footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+  
+  .wiki-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .wiki-footer p {
+    margin: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .wiki-table th, .wiki-table td {
+      font-size: 1em;
+    }
+  
+    .accordion-button {
+      font-size: 1em;
+      padding: 10px;
+    }
+  
+    .accordion-body {
+      font-size: 1em;
+    }
+  }
+  

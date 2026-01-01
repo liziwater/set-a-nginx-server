@@ -1,0 +1,129 @@
+/* 基本樣式 */
+body {
+    margin: 0;
+    font-family: 'Times New Roman', serif; /* 經典且優雅的字體 */
+    background-color: #f5f5f5; /* 米白色背景 */
+    color: #333333; /* 深灰文字 */
+}
+
+/* Header 樣式 */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: #2c3e50; /* 深藍背景 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 輕微的陰影 */
+}
+
+/* Logo 樣式 */
+.logo img {
+    height: 60px;
+}
+
+/* 導覽列樣式 */
+.navbar {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 20px; /* 按鈕間距 */
+}
+
+/* 按鈕樣式 */
+.navbar .btn {
+    text-decoration: none;
+    color: #fff; /* 白色文字 */
+    font-weight: 600;
+    padding: 12px 25px;
+    border-radius: 30px; /* 圓角按鈕 */
+    background-color: #34495e; /* 穩重的深灰藍背景 */
+    border: 2px solid transparent;
+    transition: all 0.3s ease; /* 動畫過渡 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 按鈕內文字與圖示的間距 */
+    font-size: 16px;
+    letter-spacing: 1px; /* 文字間距 */
+    cursor: pointer;
+    text-align: center;
+}
+
+/* 按鈕懸停效果 */
+.navbar .btn:hover {
+    background-color: #2980b9; /* 懸停時改為明亮的藍色 */
+    color: #fff; /* 文字顏色保持不變 */
+    border-color: #2980b9; /* 邊框顏色改變 */
+    transform: scale(1.05); /* 按鈕略微放大 */
+}
+
+/* 主按鈕（首頁） */
+.navbar .primary {
+    background-color: #f39c12; /* 黃金色，顯眼且典雅 */
+    color: #2c3e50;
+    border: none;
+}
+
+.navbar .primary:hover {
+    background-color: #e67e22; /* 橙色，與黃金色的過渡 */
+    color: white;
+    transform: scale(1.05); /* 放大效果 */
+}
+
+/* 下拉選單樣式 */
+.navbar .dropdown {
+    position: relative;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #2c3e50; /* 下拉選單背景色 */
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.navbar .dropdown-menu li a {
+    color: #fff; /* 下拉選單文字顏色 */
+    text-decoration: none;
+    padding: 12px 25px;
+    display: block;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .dropdown-menu li a:hover {
+    background-color: #2980b9; /* 懸停顏色改變 */
+    color: white;
+}
+
+/* 顯示下拉選單 */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    .navbar {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    .navbar li {
+        width: 100%;
+    }
+}
